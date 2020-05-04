@@ -1,0 +1,14 @@
+name: skywars
+main: br.com.logicmc.skywars.SkyMain
+version: 1.0
+author: icarus
+depend: [corezao]
+softdepend: [corezao]
+commands:
+    ping:
+    gamemode:
+    admin:
+    ping:
+    admin:
+    start:
+    tempo:

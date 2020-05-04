@@ -19,9 +19,15 @@
 			<version>1.0</version>
 		</dependency>
 		<dependency>
-			<groupId>br.com.zeetzmc</groupId>
+			<groupId>br.com.logicmc</groupId>
 			<artifactId>plugin-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.comphenix.protocol</groupId>
+			<artifactId>ProtocolLib</artifactId>
+			<version>4.5.0</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
@@ -36,6 +42,10 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>dmulloy2-repo</id>
+			<url>https://repo.dmulloy2.net/nexus/repository/public/</url>
 		</repository>
 	</repositories>
 </project>
