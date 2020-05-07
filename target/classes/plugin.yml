@@ -5,6 +5,8 @@ author: icarus
 depend: [corezao]
 softdepend: [corezao]
 commands:
+    setspawn:
+    setchest:
     ping:
     gamemode:
     admin:

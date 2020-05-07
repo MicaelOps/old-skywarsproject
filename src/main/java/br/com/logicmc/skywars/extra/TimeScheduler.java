@@ -38,9 +38,7 @@ public class TimeScheduler implements Runnable{
 
 		int time = logic.getTime();
 		int i = time/60;
-		Bukkit.getScoreboardManager().getMainScoreboard().getTeam("time").setSuffix("§a"+i+":"+(i == 0?time > 9 ? time : "0"+time:time%60 > 9 ? time : "0"+time));
-
-
+		Bukkit.getScoreboardManager().getMainScoreboard().getTeam("time").setSuffix("§a" + (i < 10 ? "0"+i+":" : i+":") + (time%60 < 10 ? "0"+time%60 :time%60));
 	}
 
 	private class CheckCooldown implements Consumer<UUID> {

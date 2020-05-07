@@ -1,7 +1,10 @@
 package br.com.logicmc.skywars.extra;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.function.Consumer;
 
 import org.bukkit.Bukkit;
@@ -15,15 +18,14 @@ public class YamlFile {
 
 	private final String name;
 	private FileConfiguration config;
+	private File file;
 	
 	public YamlFile(String name) {
 		this.name = name;
 	}
-	public boolean load(JavaPlugin plugin) {
 
-		if(!plugin.getDataFolder().exists())
-			plugin.getDataFolder().mkdirs();
-		File file = new File(plugin.getDataFolder(), name);
+	public boolean load(JavaPlugin plugin) {
+		file = new File(plugin.getDataFolder(), name);
 		if(!file.exists()) {
 			try {
 				file.createNewFile();
@@ -36,6 +38,39 @@ public class YamlFile {
 		return true;
 	}
 
+	public boolean loadResource(JavaPlugin plugin) {
+		file = new File(plugin.getDataFolder(), name);
+		if(!file.exists()) {
+			InputStream stream = plugin.getResource(name);
+			try {
+				try(BufferedWriter writer = Files.newBufferedWriter(file.toPath())) {
+					int i = stream.read();
+					while(i != -1){
+						writer.write(i);
+						i = stream.read();
+					}
+				}
+				stream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
+
+		}
+		config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), name));
+		return true;
+	}
+	public void save() {
+		try {
+			config.save(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public FileConfiguration getConfig() {
+		return config;
+	}
+
 	public void loopThroughSectionKeys(String section, Consumer<? super String> method) {
 		ConfigurationSection configsection = config.getConfigurationSection(section);
 		if(configsection != null)
@@ -43,9 +78,14 @@ public class YamlFile {
 	}
 	public Location getLocation(String path) {
 		if (config !=null) {
-			Location location = new Location(Bukkit.getWorlds().get(0), config.getDouble(path+".x"),config.getDouble(path+".y"),config.getDouble(path+".z"), config.getFloat(path+".yaw"), config.getFloat(path+".pitch") );
-			return location;
+			return new Location(Bukkit.getWorld("world"), config.getDouble(path+".x"),config.getDouble(path+".y"),config.getDouble(path+".z") );
 		}
 		return null;
+	}
+	public void setLocation(String path, Location location) {
+		config.set(path+".x",location.getX());
+		config.set(path+".y",location.getY());
+		config.set(path+".z",location.getZ());
+		save();
 	}
 }

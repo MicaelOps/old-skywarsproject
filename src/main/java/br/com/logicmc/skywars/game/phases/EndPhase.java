@@ -23,12 +23,12 @@ public class EndPhase implements PhaseController{
 
 	@Override
 	public PhaseController nextPhase(GameLogic logic) {
-		// TODO Auto-generated method stub
-		return null;
+		return null; // there is no next phase
 	}
 
 	@Override
 	public void begin(GameLogic logic) {
+		System.out.println("end was called");
 		Bukkit.getPluginManager().callEvent(new SkywarsWinnerEvent());
 		logic.setCurrentphase(GamePhase.END);
 	}
@@ -37,9 +37,15 @@ public class EndPhase implements PhaseController{
 	public void onTimeChange(GameLogic logic) {
 		time++;
 		
-		if(time == 10)
+		if(time == 20)
 			Bukkit.shutdown();
-		
+
+		if(time == 10) {
+			for(Player all : Bukkit.getOnlinePlayers()) {
+				all.kickPlayer("Jogo acabou");
+			}
+		}
+
 		if(time < 5) {
 			for(Player all : Bukkit.getOnlinePlayers()) {
 				all.playSound(all.getLocation(), Sound.FIREWORK_LAUNCH, 50L, 50L);

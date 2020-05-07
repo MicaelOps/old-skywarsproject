@@ -12,6 +12,8 @@ import br.com.logicmc.skywars.messages.SkyMessages;
 public enum FixedItems {
 
 
+	GOKU(Material.ENDER_PEARL, SkyMessages.KIT_GOKU),
+
 	SPECTATE_PLAYERS(Material.ENDER_PEARL, SkyMessages.SPECTATE_PLAYERS),
 	SPECTATE_JOINLOBBY(Material.REDSTONE, SkyMessages.SPECTATE_JOINLOBBY),
 	SPECTATE_JOINNEXT(Material.GLOWSTONE_DUST, SkyMessages.SPECTATE_JOINNEXT),
@@ -23,17 +25,17 @@ public enum FixedItems {
 	private final String[] lore;
 	private final ItemStack layout;
 
-	private FixedItems(Material material, SkyMessages name, String... lore) {
+	FixedItems(Material material, SkyMessages name, String... lore) {
 		this.material= material;
 		this.name = name;
 		this.lore = lore;
 		this.layout = buildStack();
 	}
 	
-	private ItemStack buildStack() {
+	public ItemStack buildStack() {
 		ItemStack stack = new ItemStack(material);
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName("default");
+		meta.setDisplayName(name.name());
 		if(lore != null && lore.length != 0)
 			meta.setLore(Arrays.asList(lore));
 		stack.setItemMeta(meta);

@@ -1,11 +1,11 @@
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\extra\YamlFile.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\SkyMain.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\messages\SkyMessages.java
+C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\commands\SetSpawn.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\commands\Tempo.java
-C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\extra\VoidWorld.java
+C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\extra\SchematicLoader.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\game\GameLogic.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\listeners\PlayerListener.java
-C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\extra\ChestManager.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\game\player\GamePlayer.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\utils\FixedItems.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\listeners\PhaseListener.java
@@ -18,6 +18,7 @@ C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\kit\
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\game\phases\EndPhase.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\listeners\SkywarsEventsListener.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\extra\Cage.java
+C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\chest\ChestManager.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\game\player\GamePlayerManager.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\listeners\DamageTrackListener.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\events\SkywarsPlayerEliminatedEvent.java
@@ -25,3 +26,5 @@ C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\game
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\kit\Kit.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\events\SkywarsWinnerEvent.java
 C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\extra\TimeScheduler.java
+C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\chest\SkyChest.java
+C:\Users\neuza\Desktop\zeetzmc\skywars\src\main\java\br\com\logicmc\skywars\commands\SetChest.java

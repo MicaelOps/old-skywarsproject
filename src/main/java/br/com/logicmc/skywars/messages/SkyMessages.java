@@ -2,6 +2,9 @@ package br.com.logicmc.skywars.messages;
 
 public enum SkyMessages {
 
+	//kits
+	KIT_GOKU,
+
 	// itens
 	SPECTATE_PLAYERS,KITS_ITEM, SPECTATE_JOINLOBBY, SPECTATE_JOINNEXT,ABILITY_ITEM,
 	

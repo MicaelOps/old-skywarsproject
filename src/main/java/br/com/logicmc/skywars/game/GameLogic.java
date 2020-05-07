@@ -1,6 +1,7 @@
 package br.com.logicmc.skywars.game;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitTask;
 
 import br.com.logicmc.skywars.SkyMain;
@@ -10,12 +11,15 @@ import br.com.logicmc.skywars.game.addons.PhaseController;
 import br.com.logicmc.skywars.game.phases.WaitingPhase;
 import br.com.logicmc.skywars.game.player.GamePlayerManager;
 
+import java.util.HashSet;
+
 public class GameLogic {
 
 	
 	private final GamePlayerManager manager;
 	private BukkitTask task;
-	
+
+	private final HashSet<Location> islands;
 	private PhaseController phasecontroller;
 	private GamePhase currentphase;
 	
@@ -23,6 +27,7 @@ public class GameLogic {
 		currentphase = GamePhase.WAITING;
 		phasecontroller = new WaitingPhase();
 		manager = new GamePlayerManager();
+		islands = new HashSet<>();
 	}
 	
 
@@ -37,7 +42,11 @@ public class GameLogic {
 	public void setCurrentphase(GamePhase currentphase) {
 		this.currentphase = currentphase;
 	}
-	
+
+	public HashSet<Location> getIslands() {
+		return islands;
+	}
+
 	public GamePlayerManager getPlayerManager() {
 		return manager;
 	}
@@ -62,6 +71,4 @@ public class GameLogic {
 	public boolean endPhase() {
 		return phasecontroller.end(this);
 	}
-	
-	
 }

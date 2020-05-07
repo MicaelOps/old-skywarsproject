@@ -21,6 +21,7 @@ public class DamageTrackListener implements Listener {
             if(event.getEntity() instanceof Player) {
                 Player player = (Player) event.getEntity();
                 if(event.getFinalDamage() >=player.getHealth()) {
+                    System.out.println("entitydamagebyentity called");
                     SkywarsPlayerEliminatedEvent eliminatedEvent = new SkywarsPlayerEliminatedEvent(player.getUniqueId());
                     Bukkit.getPluginManager().callEvent(eliminatedEvent);
 
@@ -37,10 +38,9 @@ public class DamageTrackListener implements Listener {
             if(event.getEntity() instanceof Player) {
                 Player player = (Player) event.getEntity();
                 if(event.getFinalDamage() >=player.getHealth()) {
-                    if(event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK){ // not entitydamagebyentity
-                        SkywarsPlayerEliminatedEvent eliminatedEvent = new SkywarsPlayerEliminatedEvent(player.getUniqueId());
-                        Bukkit.getPluginManager().callEvent(eliminatedEvent);
-                    }
+                    System.out.println("entitydamage called");
+                    SkywarsPlayerEliminatedEvent eliminatedEvent = new SkywarsPlayerEliminatedEvent(player.getUniqueId());
+                    Bukkit.getPluginManager().callEvent(eliminatedEvent);
                 }
             }
         }

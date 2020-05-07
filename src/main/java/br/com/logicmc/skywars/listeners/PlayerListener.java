@@ -54,15 +54,15 @@ public class PlayerListener implements Listener{
 		if(skywars.getGamelogic().getCurrentphase() == GamePhase.WAITING) { // new player to join game
 			
 			gamemanager.addGamePlayer(new GamePlayer(player.getUniqueId()));
-
-
-			// give join itens
 			giveJoin(player);
 
 			for(Player all : Bukkit.getOnlinePlayers()) {
 				all.sendMessage(skywars.messagehandler.getMessage(SkyMessages.WAITING_JOIN, skywars.playermanager.getPlayerBase(all.getUniqueId()).getPreferences().getLang()).replace("{player}", player.getName())
 						+ " " +ChatColor.GRAY+ Bukkit.getOnlinePlayers().size()+"/"+Bukkit.getMaxPlayers());
 			}
+			Bukkit.getScoreboardManager().getMainScoreboard().getTeam("players").setSuffix("§a"+(Bukkit.getOnlinePlayers().size()));
+			if(skywars.getSpawnLocation() != null)
+				player.teleport(skywars.getSpawnLocation());
 
 		} else {
 			if(gamemanager.inCountdown(player.getUniqueId())) { // ingame player left by accident?	
@@ -92,12 +92,14 @@ public class PlayerListener implements Listener{
 				all.sendMessage(skywars.messagehandler.getMessage(SkyMessages.WAITING_LEFT, skywars.playermanager.getPlayerBase(all.getUniqueId()).getPreferences().getLang()).replace("{player}", player.getName())
 						+ " " +ChatColor.GRAY+ (Bukkit.getOnlinePlayers().size()-1)+"/"+Bukkit.getMaxPlayers());
 			}
+			Bukkit.getScoreboardManager().getMainScoreboard().getTeam("players").setSuffix("§a"+(Bukkit.getOnlinePlayers().size()-1));
 			
 		} else {
 			
 			if(!gamemanager.getGamePlayer(player.getUniqueId()).isSpectator()) { // player leaving , giving 8 second countdown chance to return
 				gamemanager.addPlayerCountdown(player.getUniqueId());
 				gamemanager.getGamePlayer(player.getUniqueId()).setLastseen(System.currentTimeMillis());
+										
 			} else 
 				gamemanager.removeGamePlayer(player.getUniqueId());
 			
@@ -116,7 +118,7 @@ public class PlayerListener implements Listener{
 		if(logic.getCurrentphase() == GamePhase.WAITING || logic.getCurrentphase() == GamePhase.END || logic.getPlayerManager().isPlaying(player.getUniqueId()) || skywars.playermanager.hasPermission(player.getUniqueId(), Group.HELPER)) 
 			Bukkit.broadcastMessage(event.getFormat());
 		else
-			logic.getPlayerManager().values().stream().filter(gameplayer->gameplayer.isSpectator()).forEach(spec->Bukkit.getPlayer(spec.getUuid()).sendMessage(ChatColor.YELLOW +
+			logic.getPlayerManager().values().stream().filter(GamePlayer::isSpectator).forEach(spec->Bukkit.getPlayer(spec.getUuid()).sendMessage(ChatColor.YELLOW +
 					skywars.messagehandler.getMessage(SkyMessages.SPECTATOR_TAG, skywars.playermanager.getPlayerBase(spec.getUuid()).getPreferences().getLang()) + " " + event.getFormat()));
 	}
 	

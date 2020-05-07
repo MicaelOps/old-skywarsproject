@@ -1,31 +1,39 @@
 package br.com.logicmc.skywars.game.phases;
 
+import br.com.logicmc.skywars.chest.ChestManager;
 import br.com.logicmc.skywars.game.GameLogic;
 import br.com.logicmc.skywars.game.addons.GamePhase;
 import br.com.logicmc.skywars.game.addons.PhaseController;
+import br.com.logicmc.skywars.game.player.GamePlayer;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.ChatColor;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 public class StartedPhase implements PhaseController{
-	
-	
-	private final int refill = 300; // 5 minutes
+
+
 	private int time = 0;
 	
 	@Override
 	public void onTimeChange(GameLogic logic) {
 		
 		time++;
-		
+
+		// 5 minutes
+		int refill = 300;
 		if(time ==8) // end of invincibility
 			logic.setCurrentphase(GamePhase.STARTED);
-		
-		
-		if(time > refill-6 && time < refill ) {
+		else if(time > refill -6 && time < refill) {
 			// warn refill time in 5 seconds
+			Bukkit.broadcastMessage(ChatColor.YELLOW+"Refill in "+(refill -time)+"s");
+		} else if(time == refill) {
+			ChestManager.getInstance().refilChests();
+			Bukkit.broadcastMessage(ChatColor.YELLOW+"Chests are refilled");
 		}
 			
 	}
@@ -52,10 +60,21 @@ public class StartedPhase implements PhaseController{
 		Team tempo = scoreboard.getTeam("time");
 		tempo.removeEntry("§4");
 		tempo.addEntry("§6");
+		tempo.setPrefix("");
 		Team kills = scoreboard.registerNewTeam("kills");
 		kills.setPrefix("§fKills: ");
 		kills.setSuffix("§a0");
 		kills.addEntry("§4");
+		Player[] playarray = new Player[Bukkit.getOnlinePlayers().size()];
+		Bukkit.getOnlinePlayers().toArray(playarray);
+		int i = 0;
+		for(Location location : logic.getIslands()) {
+			if(i == playarray.length)
+				break;
+			else
+				playarray[i].teleport(location);
+			i++;
+		}
 	}
 
 	@Override
@@ -65,7 +84,8 @@ public class StartedPhase implements PhaseController{
 
 	@Override
 	public boolean end(GameLogic logic) {
-		return logic.getPlayerManager().values().stream().filter(gameplayer->!gameplayer.isSpectator()).count() == 1;
+		return logic.getPlayerManager().values().stream().allMatch(GamePlayer::isSpectator); //testing purposes
+		//return logic.getPlayerManager().values().stream().filter(gameplayer -> !gameplayer.isSpectator()).count() > 1; // real
 	}
 
 	@Override
